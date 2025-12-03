@@ -1,8 +1,10 @@
 """
 Either set ADVENT_OF_CODE_SESSION_COOKIE environment variable,
-or create a file $HOME/.config/advent-of-code/session-cookie with your session cookie
+or create a file .session-cookie in the current work directory
+or create a file $HOME/.config/advent-of-code/session-cookie,
+with your AoC session cookie.
 
-You can get your session cookie by logging in and extracting the value from the stored cookie
+You can get your session cookie by logging into AoC and extracting the value from the stored cookie
 
 NEVER SHARE THAT COOKIE, IT IS PERSONALIZED
 """
@@ -33,7 +35,7 @@ def __get_session_cookie():
 
 
 def __cache_input(func) -> Callable[[int, int], str]:
-    """Decorator that caches to the directory of the current script into .cache folder"""
+    """Decorator that caches an input file or retrieves a cached input file"""
 
     @functools.wraps(func)
     def wrapper(year: int, day: int) -> str:
@@ -56,7 +58,9 @@ def __get_puzzle_input(year: int, day: int) -> str:
 
     if session_cookie is None:
         raise ValueError(
-            "Please set session cookie to download your input.\nEither set ADVENT_OF_CODE_SESSION_COOKIE environment variable,\nor create a file $HOME/.config/advent-of-code/session-cookie with your session cookie"
+            "Please set session cookie to download your input.\n\
+                Either set ADVENT_OF_CODE_SESSION_COOKIE environment variable,\n\
+                    or create a file $HOME/.config/advent-of-code/session-cookie with your session cookie"
         )
 
     url = f"https://adventofcode.com/{year}/day/{day}/input"
