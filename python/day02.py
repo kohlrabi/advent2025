@@ -20,8 +20,20 @@ def part1(line: str) -> int:
     return invalid
 
 
-def part2(lines: str) -> int:
-    return 0
+def part2(line: str) -> int:
+    invalid: int = 0
+
+    ranges = (range(int((v := tup.split("-"))[0]), int(v[1]) + 1) for tup in line.split(","))
+    for num in itertools.chain(*ranges):
+        snum = str(num)
+        n = len(snum)
+        for i in range(1, n // 2 + 1):
+            selected = snum[:i]
+            if selected * (n // i) == snum:
+                invalid += num
+                break
+
+    return invalid
 
 
 if __name__ == "__main__":
