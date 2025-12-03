@@ -21,7 +21,7 @@ __COOKIEPATH = pathlib.Path.home() / ".config" / "advent-of-code/session-cookie"
 __LOCALCOOKIE = pathlib.Path(__file__).parent / ".session-cookie"
 
 
-def get_session_cookie():
+def __get_session_cookie():
     if __ENV_VAR in os.environ:
         return os.environ[__ENV_VAR].strip()
     elif __LOCALCOOKIE.exists():
@@ -52,7 +52,7 @@ def __cache_input(func) -> Callable[[int, int], str]:
 
 @__cache_input
 def __get_puzzle_input(year: int, day: int) -> str:
-    session_cookie = get_session_cookie()
+    session_cookie = __get_session_cookie()
 
     if session_cookie is None:
         raise ValueError(
