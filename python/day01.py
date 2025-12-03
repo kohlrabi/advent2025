@@ -26,6 +26,33 @@ def part1(lines: Iterable[str]) -> int:
     return zeros
 
 
+def part2(lines: Iterable[str]) -> int:
+    zeros: int = 0
+    pos: int = 50
+    for line in lines:
+        direction, turns = get_direction_turns(line)
+
+        npos = direction(pos, turns)
+        if npos == 0:
+            zeros += 1
+
+        n, npos = divmod(npos, MODULUS)
+
+        zeros += abs(n)
+
+        # special case rotating left
+        if n < 0:
+            if pos == 0 and npos != 0:
+                zeros -= 1
+            if npos == 0:
+                zeros += 1
+
+        pos = npos
+
+    return zeros
+
+
 if __name__ == "__main__":
     lines = get_puzzle_input(2025, 1).splitlines()
-    print(part1(lines))
+    print(f"part1: {part1(lines)}")
+    print(f"part2: {part2(lines)}")
