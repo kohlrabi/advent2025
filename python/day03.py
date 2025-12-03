@@ -4,8 +4,6 @@ from collections.abc import Iterable
 
 from puzzle_input_getter import get_puzzle_input
 
-MODULUS: int = 100
-
 
 def part1(lines: Iterable[str]) -> int:
     joltage = 0

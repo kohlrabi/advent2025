@@ -4,8 +4,6 @@ import itertools
 
 from puzzle_input_getter import get_puzzle_input
 
-MODULUS: int = 100
-
 
 def part1(line: str) -> int:
     invalid: int = 0
